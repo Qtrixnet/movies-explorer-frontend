@@ -1,0 +1,18 @@
+.section-title {
+  padding: 0 0 23px;
+  margin: 0;
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 400;
+  border-bottom: 1px solid #DADADA;
+  align-self: start;
+  width: 100%;
+}
+
+@media screen and (max-width: 425px) {
+  .section-title {
+    padding: 0 0 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

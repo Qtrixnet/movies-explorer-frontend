@@ -1,0 +1,1 @@
+import './InfoTooltip.css';

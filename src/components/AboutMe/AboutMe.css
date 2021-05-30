@@ -1,0 +1,151 @@
+.student {
+  padding: 110px 70px 101px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.student__info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.student__name {
+  padding: 66px 0 18px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  max-width: 600px;
+}
+
+.student__profession {
+  padding: 0 0 26px;
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  max-width: 600px;
+}
+
+.student__bio{
+  padding: 0 0 99px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  max-width: 600px;
+}
+
+.student__photo {
+  width: 270px;
+  height: 327px;
+  margin-top: 66px;
+  margin-left: 20px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.student__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  max-width: 600px;
+  flex-wrap: wrap;
+}
+
+.student__link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+  padding: 5px;
+  margin-right: 10px;
+  transition: .2s all ease;
+}
+
+.student__link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .student {
+    padding: 90px 50px 91px;
+  }
+
+  .student__name {
+    padding: 66px 0 16px;
+    font-size: 40px;
+    line-height: 40px;
+    max-width: 348px;
+  }
+
+  .student__profession {
+    padding: 0 0 20px;
+    font-size: 12px;
+    line-height: 18px;
+    max-width: 348px;
+  }
+
+  .student__bio{
+    padding: 0 0 87px;
+    font-size: 12px;
+    line-height: 18px;
+    max-width: 348px;
+  }
+
+  .student__photo {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .student {
+    padding: 70px 14px;
+  }
+
+  .student__name {
+    padding: 40px 0 20px;
+    font-size: 30px;
+    line-height: 36px;
+    max-width: 292px;
+  }
+
+  .student__profession {
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 292px;
+  }
+
+  .student__bio{
+    padding: 0 0 40px;
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 292px;
+  }
+
+  .student__photo {
+    width: 292px;
+    height: 352px;
+    margin-top: 60px;
+    margin-left: 0px;
+  }
+
+  .student__info {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .student__link {
+    margin-right: 16px;
+  }
+}

@@ -39,6 +39,7 @@
 
 .search-form__button:hover {
   cursor: pointer;
+  opacity: .8;
 }
 
 .search-form__button:after {

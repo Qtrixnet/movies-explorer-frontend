@@ -6,16 +6,15 @@ import { Link } from 'react-router-dom';
 export default function Profile() {
   const errors = {
     name: 'Что-то пошло не так...',
-    // name: false,
   }
 
   return (
     <section className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
       <form className="profile__form">
-        <label className="profile__label">Имя<input minLength="2" disabled className="profile__input" type="text" defaultValue="Виталий" />
+        <label className="profile__label">Имя<input required minLength="2" disabled className="profile__input" type="text" defaultValue="Виталий" />
         </label>
-        <label className="profile__label">E-mail<input  minLength="2" disabled className="profile__input" type="text" defaultValue="pochta@yandex.ru" />
+        <label className="profile__label">E-mail<input required minLength="2" disabled className="profile__input" type="text" defaultValue="pochta@yandex.ru" />
         </label>
         <span
           id="form__input-error"

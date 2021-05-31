@@ -25,7 +25,7 @@ export default function App() {
   <div className="App">
    <Switch>
     <Route exact path="/">
-     <Header />
+     <Header path="/"/>
      <Main>
       <Promo />
       <Navtab />
@@ -75,9 +75,6 @@ export default function App() {
     <Route path="/*">
      <Error message="Страница не найдена" status="404" />
     </Route>
-    {/* <Route>
-          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
-        </Route> */}
    </Switch>
   </div>
  );

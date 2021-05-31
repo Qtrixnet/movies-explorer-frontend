@@ -5,7 +5,6 @@ import React from "react";
 export default function Input({ label, id, name, type, defaultValue }) {
   const errors = {
     name: 'Что-то пошло не так...',
-    // name: false,
   }
 
   return (

@@ -3,7 +3,7 @@ import './Header.css'
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ path = false }) {
 
   const loggedIn = true;
 
@@ -21,7 +21,7 @@ export default function Header() {
     <>
       {
         !loggedIn ?
-          <header className='header'>
+          <header className='header header_logged-out'>
             <Link to="/" className="header__logo" />
             <div className="header__button-container">
               <Link to="/sign-up" className="header__button">Регистрация</Link>
@@ -29,7 +29,7 @@ export default function Header() {
             </div>
           </header >
           :
-          <header className='header'>
+          <header className={path === "/" ? 'header header_logged-out' : 'header header_logged-in'}>
             <Link to="/" className="header__logo" />
             <div className="header__button-container header__button-container_logged header_logged-buttons">
               <Link to="/movies" className="header__logged-button header__logged-button_active">Фильмы</Link>

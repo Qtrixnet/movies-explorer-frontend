@@ -2,7 +2,7 @@ import './Main.css'
 
 import React from "react";
 
-export default function Main({ children }) {
+export default function Main({ children = [] }) {
 
   return (
     <main className="main">

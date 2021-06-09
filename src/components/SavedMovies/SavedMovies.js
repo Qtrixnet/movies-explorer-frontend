@@ -1,45 +1,51 @@
 import './SavedMovies.css';
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MoviesCardList from '../MoviesCardList';
+import SearchForm from '../SearchForm';
+import { filterMovies } from '../../utils/utils';
 
-export default function SavedMovies() {
+export default function SavedMovies({ onDeleteClick = false, savedMoviesList = [] }) {
 
-  const movies = [
-    {
-      image: "https://4sport.ua/_upl/2/1445/0_c77ca_335b91fd_orig.jpg",
-      title: "Название Фильма",
-      time: "1ч 42м",
-      _id: 1,
-      saved: true
-    },
-    {
-      image: "https://4sport.ua/_upl/2/1445/0_c77ca_335b91fd_orig.jpg",
-      title: "Название Фильма",
-      time: "1ч 42м",
-      _id: 2,
-      saved: true
-    },
-    {
-      image: "https://4sport.ua/_upl/2/1445/0_c77ca_335b91fd_orig.jpg",
-      title: "Название Фильма",
-      time: "1ч 42м",
-      _id: 3,
-      saved: true
-    },
-    {
-      image: "https://4sport.ua/_upl/2/1445/0_c77ca_335b91fd_orig.jpg",
-      title: "Название Фильма",
-      time: "1ч 42м",
-      _id: 4,
-      saved: true
-    },
-  ]
+  const [shortMovies, setShortMovies] = useState(false);
+  const [filteredSavedMovies, setFilteredMovies] = useState(savedMoviesList);
+
+  //* Поиск по запросу
+  function handleSearchSubmit(inputValue) {
+    return setFilteredMovies(filterMovies(savedMoviesList, inputValue, shortMovies))
+  }
+
+  //* Состояние чекбокса
+  function handleShortFilms() {
+    setShortMovies(!shortMovies)
+    localStorage.setItem('shortSavedMovies', !shortMovies);
+  }
+
+  //* Проверка чекбокса в локальном хранилище
+  useEffect(() => {
+    if (localStorage.getItem('shortSavedMovies') === 'true') {
+      setShortMovies(true)
+    } else {
+      setShortMovies(false)
+    }
+  }, []);
 
   return (
-    <section className="movies">
-      <MoviesCardList movies={movies} />
-      <button className="movies__more-films">Ещё</button>
-    </section>
+    <>
+      <SearchForm
+        handleSearchSubmit={handleSearchSubmit}
+        checkBoxClick={handleShortFilms}
+        shortMovies={shortMovies}
+      />
+      <section className="movies">
+        <MoviesCardList
+          moviesList={filteredSavedMovies}
+          onDeleteClick={onDeleteClick}
+          onLikeClick={false}
+          savedMoviesPage={true}
+          savedMovies={savedMoviesList}
+        />
+      </section>
+    </>
   )
 }

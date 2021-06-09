@@ -3,9 +3,8 @@ import './Header.css'
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
-export default function Header({ path = false }) {
+export default function Header({ path = false, loggedIn = false }) {
 
-  const loggedIn = true;
 
   const [isClicked, setIsDataLoad] = useState(false);
 

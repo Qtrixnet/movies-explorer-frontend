@@ -1,6 +1,7 @@
 .movies__card {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .movies__card-image {
@@ -23,6 +24,35 @@
   line-height: 16px;
 }
 
+.movies__card-link {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.movies__card-overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 8999;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  background-image: url('../../images/play.svg');
+  filter:drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px;
+
+}
+
+.movies__card-overlay:hover {
+  opacity: 1;
+}
+
+.movies__card-link:hover .movies__card-image {
+  filter: grayscale(1);
+}
+
 .movies__card-like-button {
   width: 24px;
   height: 24px;
@@ -32,7 +62,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("../../images/not-saved.svg");
-  transition: all .2s ease;
 }
 
 .movies__card-like-button_saved {
@@ -45,14 +74,14 @@
   background-position: center;
   background-image: url("../../images/saved.svg");
   visibility: hidden;
-  transition: all .2s ease;
 }
 
-.movies__card:hover .movies__card-like-button_saved{
+.movies__card:hover .movies__card-like-button_saved {
   visibility: visible;
 }
 
-.movies__card-like-button:hover, .movies__card-like-button_saved:hover {
+.movies__card-like-button:hover,
+.movies__card-like-button_saved:hover {
   cursor: pointer;
   opacity: 0.8;
 }
@@ -60,7 +89,6 @@
 .movies__card-like-button_liked {
   background-image: url("../../images/like.svg");
 }
-
 
 .movies__card-movie-time {
   font-weight: 400;

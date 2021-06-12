@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, useLocation } from "react-router-dom";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import mainApi from "../../utils/MainApi";
 import Preloader from '../Preloader';
@@ -28,7 +28,17 @@ export default function App() {
   const [isDataLoad, setIsDataLoad] = useState(false);
   const [loginErrorText, setLoginErrorText] = useState({});
   const [registerErrorText, setRegisterErrorText] = useState({});
-  const [savedMoviesList, setSavedMoviesList] = React.useState([]);
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState('');
+
+  function usePageViews() {
+    let location = useLocation();
+    useEffect(() => {
+      setCurrentLocation(location.pathname)
+    }, [location]);
+  }
+
+  usePageViews();
 
   //* Вход в систему
   function handleLogin({ email, password }) {
@@ -80,7 +90,6 @@ export default function App() {
         .then(data => {
           if (data) {
             setLoggedIn(true)
-            history.push('/movies');
           }
         })
         .catch(err => { console.log(err); })
@@ -132,9 +141,20 @@ export default function App() {
 
   //* Удаление фильма
   function handleDeleteMovie(movie) {
-    mainApi.deleteMovie(movie._id)
-      .then(() => {
-        const newMoviesList = savedMoviesList.filter((m) => m._id === movie._id ? false : true);
+    const savedMovie = savedMoviesList.find((item) => {
+      if (item.movieId === movie.id || item.movieId === movie.movieId) {
+        return item
+      }
+    })
+    mainApi.deleteMovie(savedMovie._id)
+      .then((res) => {
+        const newMoviesList = savedMoviesList.filter((m) => {
+          if(movie.id === m.movieId || movie.movieId === m.movieId) {
+            return false
+          } else {
+            return true
+          }
+        })
         setSavedMoviesList(newMoviesList);
       })
       .catch(err => console.log(err))
@@ -167,7 +187,7 @@ export default function App() {
             </Main>
           </Route>
           <Route path="/movies">
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/sign-in" />}
+            {loggedIn ? '' : <Redirect to="/" />}
             <Header loggedIn={loggedIn} />
             <Main>
               <Movies
@@ -179,7 +199,7 @@ export default function App() {
             <Footer />
           </Route>
           <Route path="/saved-movies">
-            {loggedIn ? <Redirect to="/saved-movies" /> : <Redirect to="/sign-in" />}
+            {loggedIn ? '' : <Redirect to="/" />}
             <Header loggedIn={loggedIn} />
             <Main>
               <SavedMovies savedMoviesList={savedMoviesList} onDeleteClick={handleDeleteMovie} />
@@ -187,7 +207,7 @@ export default function App() {
             <Footer />
           </Route>
           <Route path="/profile">
-            {loggedIn ? <Redirect to="/profile" /> : <Redirect to="/sign-in" />}
+            {loggedIn ? '' : <Redirect to="/" />}
             <Header loggedIn={loggedIn} />
             <Main>
               {isDataLoad ?

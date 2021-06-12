@@ -1,7 +1,7 @@
 import './Header.css'
 
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 
 export default function Header({ path = false, loggedIn = false }) {
 
@@ -31,11 +31,11 @@ export default function Header({ path = false, loggedIn = false }) {
           <header className={path === "/" ? 'header header_logged-out' : 'header header_logged-in'}>
             <Link to="/" className="header__logo" />
             <div className="header__button-container header__button-container_logged header_logged-buttons">
-              <Link to="/movies" className="header__logged-button header__logged-button_active">Фильмы</Link>
-              <Link to="/saved-movies" className="header__logged-button">Сохраненные фильмы</Link>
+              <NavLink to="/movies" activeClassName="header__logged-button_active" className="header__logged-button">Фильмы</NavLink>
+              <NavLink to="/saved-movies" activeClassName="header__logged-button_active" className="header__logged-button">Сохраненные фильмы</NavLink>
             </div>
             <div className="header__button-container header__button-container_logged">
-              <Link to="/profile" className="header__logged-button header__logged-button_account">Аккаунт<span className="header__account-icon"></span></Link>
+              <NavLink to="/profile" activeClassName="header__logged-button_active" className="header__logged-button header__logged-button_account">Аккаунт<span className="header__account-icon"></span></NavLink>
             </div>
             <button onClick={handleOpen} className="header__burger-menu">
               <span></span>
@@ -45,9 +45,9 @@ export default function Header({ path = false, loggedIn = false }) {
                 <>
                   <div className="header__overlay"></div>
                   <div className="header__menu">
-                    <Link to="/" onClick={handleClose} className="header__menu-button">Главная</Link>
-                    <Link to="/movies" onClick={handleClose} className="header__menu-button">Фильмы</Link>
-                    <Link to="/saved-movies" onClick={handleClose} className="header__menu-button">Сохраненные фильмы</Link>
+                    <NavLink exact to="/" onClick={handleClose} activeClassName="header__menu-button_active" className="header__menu-button">Главная</NavLink>
+                    <NavLink to="/movies" onClick={handleClose} activeClassName="header__menu-button_active" className="header__menu-button">Фильмы</NavLink>
+                    <NavLink to="/saved-movies" onClick={handleClose} activeClassName="header__menu-button_active" className="header__menu-button">Сохраненные фильмы</NavLink>
                     <Link to="/profile" onClick={handleClose} className="header__logged-button header__logged-button_account">Аккаунт<span className="header__account-icon"></span></Link>
                     <button onClick={handleClose} className="header__menu-close">&#x2716;</button>
                   </div>

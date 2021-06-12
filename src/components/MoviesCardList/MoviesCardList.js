@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import MoviesCard from '../MoviesCard';
 import useScreenWidth from '../../hooks/useScreenWidth';
 
-export default function MoviesCardList({ moviesList = [], onLikeClick = false, onDeleteClick = false, savedMovies = [], savedMoviesPage = false }) {
+export default function MoviesCardList({ nothingFound = false, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMovies = [], savedMoviesPage = false }) {
 
   const screenWidth = useScreenWidth();
   const [showMovieList, setShowMovieList] = useState([]);
@@ -12,14 +12,7 @@ export default function MoviesCardList({ moviesList = [], onLikeClick = false, o
 
   //* Сравнение фильмов и проверка на лайк
   function getSavedMovieCard(savedMovies, movie) {
-    if (savedMovies) {
-      return savedMovies.find((savedMovie) => {
-        if (savedMovie.movieId === movie.id) {
-          movie._id = savedMovie._id
-        }
-        return savedMovie.movieId === movie.id;
-      });
-    }
+    return savedMovies.find(savedMovie => savedMovie.movieId === movie.id)
   };
 
   //* Количество отображаемых карточек при разной ширине экрана
@@ -56,19 +49,24 @@ export default function MoviesCardList({ moviesList = [], onLikeClick = false, o
 
   return (
     <>
-      <ul className="movies__card-list">
-        {showMovieList.map((movie) => (
-          <MoviesCard
-            saved={getSavedMovieCard(savedMovies, movie)}
-            key={movie.id || movie._id}
-            movie={movie}
-            onLikeClick={onLikeClick}
-            onDeleteClick={onDeleteClick}
-            savedMoviesPage={savedMoviesPage}
-          />
-        ))}
-      </ul>
-      {showMovieList.length >= 12 && showMovieList.length < moviesList.length ? <button onClick={handleClickMoreMovies} className="movies__more-films">Ещё</button> : ''}
+      {
+        nothingFound ? <span id="movies__error" className='movies__error movies__error_visible'>Ничего не найдено</span> :
+          <>
+            <ul className="movies__card-list">
+              {showMovieList.map((movie) => (
+                <MoviesCard
+                  saved={getSavedMovieCard(savedMovies, movie)}
+                  key={movie.id || movie._id}
+                  movie={movie}
+                  onLikeClick={onLikeClick}
+                  onDeleteClick={onDeleteClick}
+                  savedMoviesPage={savedMoviesPage}
+                />
+              ))}
+            </ul>
+            {showMovieList.length >= 12 && showMovieList.length < moviesList.length ? <button onClick={handleClickMoreMovies} className="movies__more-films">Ещё</button> : ''}
+          </>
+      }
     </>
   )
 }

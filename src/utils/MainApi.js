@@ -116,8 +116,7 @@ class Api {
 }
 
 const mainApi = new Api({
-  // serverUrl: "https://api.mesto-qtrixnet.nomore.nomoredomains.club",
-  serverUrl: "http://localhost:3001",
+  serverUrl: "http://api.movies-searcher.nomoredomains.club",
 });
 
 export default mainApi;

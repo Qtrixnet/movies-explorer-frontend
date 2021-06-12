@@ -116,7 +116,7 @@ class Api {
 }
 
 const mainApi = new Api({
-  serverUrl: "http://api.movies-searcher.nomoredomains.club",
+  serverUrl: "https://api.movies-searcher.nomoredomains.club",
 });
 
 export default mainApi;

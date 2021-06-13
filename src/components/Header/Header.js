@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { Link, NavLink} from 'react-router-dom';
 
 export default function Header({ path = false, loggedIn = false }) {
-
-
   const [isClicked, setIsDataLoad] = useState(false);
 
   function handleClose() {

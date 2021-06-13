@@ -93,7 +93,7 @@ export default function Movies({ onLikeClick = false, onDeleteClick = false, sav
                     moviesList={filteredMovies}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
-                    savedMovies={savedMoviesList}
+                    savedMoviesList={savedMoviesList}
                     savedMoviesPage={false}
                   />
               }

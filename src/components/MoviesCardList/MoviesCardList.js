@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard';
 import useScreenWidth from '../../hooks/useScreenWidth';
 import { DEVICE_PARAMS } from '../../utils/constants';
 
-export default function MoviesCardList({ nothingFound = false, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMovies = [], savedMoviesPage = false}) {
+export default function MoviesCardList({ nothingFound = false, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMoviesList = [], savedMoviesPage = false}) {
   
   const { tablet, mobileL, mobileS } = DEVICE_PARAMS;
   const screenWidth = useScreenWidth();
@@ -13,8 +13,8 @@ export default function MoviesCardList({ nothingFound = false, moviesList = [], 
   const [isMount, setIsMount] = useState(true);
 
   //* Сравнение фильмов и проверка на лайк
-  function getSavedMovieCard(savedMovies, movie) {
-    return savedMovies.find(savedMovie => savedMovie.movieId === movie.id)
+  function getSavedMovieCard(savedMoviesList, movie) {
+    return savedMoviesList.find(savedMovie => savedMovie.movieId === movie.id)
   };
 
   //* Количество отображаемых карточек при разной ширине экрана
@@ -57,7 +57,7 @@ export default function MoviesCardList({ nothingFound = false, moviesList = [], 
             <ul className="movies__card-list">
               {showMovieList.map((movie) => (
                 <MoviesCard
-                  saved={getSavedMovieCard(savedMovies, movie)}
+                  saved={getSavedMovieCard(savedMoviesList, movie)}
                   key={movie.id || movie._id}
                   movie={movie}
                   onLikeClick={onLikeClick}

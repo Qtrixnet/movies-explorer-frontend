@@ -26,12 +26,12 @@ export default function SavedMovies({ onDeleteClick = false, savedMoviesList = [
   //* Состояние чекбокса
   function handleShortFilms() {
     if (shortMovies) {
-      localStorage.setItem('shortSavedMovies', false);
       setShortMovies(false)
-      setShowedMovies(filteredMovies)
+      localStorage.setItem('shortSavedMovies', false);
+      setShowedMovies(savedMoviesList)
     } else {
-      localStorage.setItem('shortSavedMovies', true);
       setShortMovies(true)
+      localStorage.setItem('shortSavedMovies', true);
       setShowedMovies(filterShortMovies(filteredMovies))
     }
   }

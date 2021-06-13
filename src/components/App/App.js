@@ -29,16 +29,6 @@ export default function App() {
   const [loginErrorText, setLoginErrorText] = useState({});
   const [registerErrorText, setRegisterErrorText] = useState({});
   const [savedMoviesList, setSavedMoviesList] = useState([]);
-  const [currentLocation, setCurrentLocation] = useState('');
-
-  function usePageViews() {
-    let location = useLocation();
-    useEffect(() => {
-      setCurrentLocation(location.pathname)
-    }, [location]);
-  }
-
-  usePageViews();
 
   //* Вход в систему
   function handleLogin({ email, password }) {
@@ -163,7 +153,6 @@ export default function App() {
       )
   };
 
-
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -191,7 +180,7 @@ export default function App() {
             </Main>
           </Route>
           <Route path="/movies">
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+            {loggedIn ? '' : <Redirect to="/" /> }
             <Header loggedIn={loggedIn} />
             <Main>
               <Movies

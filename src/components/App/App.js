@@ -72,7 +72,7 @@ export default function App() {
     mainApi.register(name, email, password)
       .then(data => {
         if (data) {
-          history.push('/movies');
+          history.push('/sign-in');
         }
       })
       .catch(err => {
@@ -122,7 +122,6 @@ export default function App() {
 
   //* Редактирование данных пользователя
   function handleUpdateUser(newUserData) {
-    console.log(newUserData)
     setIsDataLoad(true);
     mainApi.updateUserInfo(newUserData)
       .then(res => { setCurrentUser(res); })
@@ -144,12 +143,14 @@ export default function App() {
     const savedMovie = savedMoviesList.find((item) => {
       if (item.movieId === movie.id || item.movieId === movie.movieId) {
         return item
+      } else {
+        return savedMoviesList
       }
     })
     mainApi.deleteMovie(savedMovie._id)
       .then((res) => {
         const newMoviesList = savedMoviesList.filter((m) => {
-          if(movie.id === m.movieId || movie.movieId === m.movieId) {
+          if (movie.id === m.movieId || movie.movieId === m.movieId) {
             return false
           } else {
             return true
@@ -157,8 +158,11 @@ export default function App() {
         })
         setSavedMoviesList(newMoviesList);
       })
-      .catch(err => console.log(err))
+      .catch((err) =>
+        console.log(err)
+      )
   };
+
 
   return (
     <div className="App">
@@ -187,7 +191,7 @@ export default function App() {
             </Main>
           </Route>
           <Route path="/movies">
-            {loggedIn ? '' : <Redirect to="/" />}
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
             <Header loggedIn={loggedIn} />
             <Main>
               <Movies
@@ -202,7 +206,10 @@ export default function App() {
             {loggedIn ? '' : <Redirect to="/" />}
             <Header loggedIn={loggedIn} />
             <Main>
-              <SavedMovies savedMoviesList={savedMoviesList} onDeleteClick={handleDeleteMovie} />
+              <SavedMovies
+                savedMoviesList={savedMoviesList}
+                onDeleteClick={handleDeleteMovie}
+              />
             </Main>
             <Footer />
           </Route>

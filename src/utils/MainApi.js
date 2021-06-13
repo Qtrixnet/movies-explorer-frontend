@@ -1,3 +1,5 @@
+import { BASE_URL } from './constants';
+
 //* Класс для взаимодействия с сервером
 class Api {
   constructor(data) {
@@ -116,7 +118,7 @@ class Api {
 }
 
 const mainApi = new Api({
-  serverUrl: "https://api.movies-searcher.nomoredomains.club",
+  serverUrl: BASE_URL,
 });
 
 export default mainApi;

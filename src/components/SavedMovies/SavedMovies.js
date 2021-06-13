@@ -14,7 +14,6 @@ export default function SavedMovies({ onDeleteClick = false, savedMoviesList = [
   
   // //* Поиск по запросу
   function handleSearchSubmit(inputValue) {
-    console.log(filterMovies(savedMoviesList, inputValue, shortMovies).length)
     if(filterMovies(savedMoviesList, inputValue, shortMovies).length === 0) {
       setNothingFound(true)
     } else {
@@ -27,15 +26,13 @@ export default function SavedMovies({ onDeleteClick = false, savedMoviesList = [
   //* Состояние чекбокса
   function handleShortFilms() {
     if (shortMovies) {
-      setShortMovies(false)
       localStorage.setItem('shortSavedMovies', false);
+      setShortMovies(false)
       setShowedMovies(filteredMovies)
-      console.log('Длиннометражки')
     } else {
-      setShortMovies(true)
       localStorage.setItem('shortSavedMovies', true);
+      setShortMovies(true)
       setShowedMovies(filterShortMovies(filteredMovies))
-      console.log('Короткометражки')
     }
   }
 
@@ -48,7 +45,7 @@ export default function SavedMovies({ onDeleteClick = false, savedMoviesList = [
       setShortMovies(false)
       setShowedMovies(savedMoviesList)
     }
-  }, []);
+  }, [savedMoviesList]);
 
   return (
     <>

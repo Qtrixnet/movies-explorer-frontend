@@ -2,12 +2,14 @@ import './MoviesCardList.css';
 import React, { useState, useEffect } from "react";
 import MoviesCard from '../MoviesCard';
 import useScreenWidth from '../../hooks/useScreenWidth';
+import { DEVICE_PARAMS } from '../../utils/constants';
 
-export default function MoviesCardList({ nothingFound = false, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMovies = [], savedMoviesPage = false }) {
-
+export default function MoviesCardList({ nothingFound = false, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMovies = [], savedMoviesPage = false}) {
+  
+  const { tablet, mobileL, mobileS } = DEVICE_PARAMS;
   const screenWidth = useScreenWidth();
   const [showMovieList, setShowMovieList] = useState([]);
-  const [cardsShowDetails, setCardsShowDetails] = useState({ sum: 12, more: 4 });
+  const [cardsShowDetails, setCardsShowDetails] = useState({ total: 12, more: 4 });
   const [isMount, setIsMount] = useState(true);
 
   //* Сравнение фильмов и проверка на лайк
@@ -17,23 +19,23 @@ export default function MoviesCardList({ nothingFound = false, moviesList = [], 
 
   //* Количество отображаемых карточек при разной ширине экрана
   useEffect(() => {
-    if (screenWidth > 768) {
-      setCardsShowDetails({ sum: 12, more: 4 });
-    } else if (screenWidth <= 768 && screenWidth > 480) {
-      setCardsShowDetails({ sum: 8, more: 2 });
+    if (screenWidth > tablet.width) {
+      setCardsShowDetails(tablet.cards);
+    } else if (screenWidth <= tablet.width && screenWidth > mobileL.width) {
+      setCardsShowDetails(mobileL.cards);
     } else {
-      setCardsShowDetails({ sum: 5, more: 2 });
+      setCardsShowDetails(mobileS.cards);
     }
     return () => setIsMount(false);
-  }, [screenWidth, isMount]);
+  }, [screenWidth, isMount, tablet, mobileL, mobileS]);
 
   //* Изменяем отображаемый массив фильмов взависимости от ширины экрана
   useEffect(() => {
     if (moviesList.length) {
-      const res = moviesList.filter((item, i) => i < cardsShowDetails.sum);
+      const res = moviesList.filter((item, i) => i < cardsShowDetails.total);
       setShowMovieList(res);
     }
-  }, [moviesList, savedMoviesPage, cardsShowDetails.sum]);
+  }, [moviesList, savedMoviesPage, cardsShowDetails.total]);
 
   //* Добавление карточек при клике по кнопке "Еще"
   function handleClickMoreMovies() {

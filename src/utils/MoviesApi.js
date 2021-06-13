@@ -1,5 +1,7 @@
+import { MOVIES_URL } from "./constants";
+
 export function getMovies() {
-  return fetch('https://api.nomoreparties.co/beatfilm-movies')
+  return fetch(MOVIES_URL)
   .then(res => {
     if (res.ok) {
       return res.json();

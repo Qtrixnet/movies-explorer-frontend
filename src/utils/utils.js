@@ -1,6 +1,8 @@
+import { SHORTMOVIES_DURATION } from './constants';
+
 //* Фильтрация по длительности
 export function filterShortMovies(movies) {
-  return movies.filter((movie) => movie.duration < 40);
+  return movies.filter((movie) => movie.duration < SHORTMOVIES_DURATION);
 };
 
 //* Фильтрация по запросу

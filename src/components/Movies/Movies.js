@@ -72,8 +72,6 @@ export default function Movies({ onLikeClick = false, onDeleteClick = false, sav
       } else {
         setFilteredMovies(movies);
       }
-    } else {
-      console.log('поиска еще не было')
     }
     
   }, []);

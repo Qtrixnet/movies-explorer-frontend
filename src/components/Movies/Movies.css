@@ -18,7 +18,22 @@
   border-radius: 6px;
 }
 
-.movies__more-fils:hover { 
+.movies__error {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: rgba(238, 52, 101, 1);
+  margin: 0 auto;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.movies__error_visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.movies__more-films:hover { 
   cursor: pointer;
   opacity: .8;
 }

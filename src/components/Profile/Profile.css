@@ -20,16 +20,16 @@
 .profile__label {
   width: 100%;
   position: relative;
-  padding: 16px 0;
+  padding: 14px 0;
   font-weight: 400;
   font-size: 11px;
   line-height: 14px;
-  color: rgba(255, 255, 255, 1);
+  color: rgb(0, 0, 0);
   border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
 
 .profile__label_green {
-  border-bottom: 1px solid rgba(61, 220, 132, 1);;
+  border-bottom: 1px solid rgba(61, 220, 132, 1);
 }
 
 .profile__input {
@@ -42,9 +42,15 @@
   font-weight: 400;
   font-size: 11px;
   line-height: 14px;
-  color: rgba(255, 255, 255, 1);
+  color: rgb(0, 0, 0);
   padding: 16px 0;
   border: 0;
+  border-radius: 50px;
+}
+
+.profile__input:focus {
+  outline: 0;
+  color: #4285f4;
 }
 
 .profile__label:nth-last-of-type(1) {
@@ -56,11 +62,15 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  color: rgba(255, 255, 255, 1);
+  color: rgb(0, 0, 0);
   text-decoration: none;
   padding: 8px 20px;
   background-color: transparent;
   border: 0;
+}
+
+.profile__button_edit:hover {
+  color: #4285f4;
 }
 
 .profile__button:hover {

@@ -48,9 +48,9 @@ export default function Profile({ user = {}, onSignOut = false, onEditProfile = 
         >{errors.name}</span>
         {
           disableInput ?
-            <button className="profile__button" onClick={handleChangeData}>Редактировать</button>
+            <button className="profile__button profile__button_edit" onClick={handleChangeData}>Редактировать</button>
             :
-            <button className="profile__button" disabled={!isValid} onClick={handleSubmit}>Сохранить</button>
+            <button className="profile__button profile__button_edit" disabled={!isValid} onClick={handleSubmit}>Сохранить</button>
         }
       </form>
       <Link to="/"

@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { Route, Switch, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, } from "react-router-dom";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import mainApi from "../../utils/MainApi";
 import Preloader from '../Preloader';
@@ -154,11 +154,11 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
+      <Header loggedIn={loggedIn} />
         <Switch>
           <Route exact path="/">
-            <Header path="/" loggedIn={loggedIn} />
             <Main>
               <Promo />
               <Navtab />
@@ -167,7 +167,6 @@ export default function App() {
               <AboutMe />
               <Portfolio />
             </Main>
-            <Footer />
           </Route>
           <Route path="/sign-up">
             <Main>
@@ -180,31 +179,28 @@ export default function App() {
             </Main>
           </Route>
           <Route path="/movies">
-            {loggedIn ? '' : <Redirect to="/" /> }
-            <Header loggedIn={loggedIn} />
+            {loggedIn ? '' : <Redirect to="/" />}
             <Main>
               <Movies
+                user={currentUser}
                 savedMoviesList={savedMoviesList}
                 onLikeClick={handleSaveMovie}
                 onDeleteClick={handleDeleteMovie}
               />
             </Main>
-            <Footer />
           </Route>
           <Route path="/saved-movies">
             {loggedIn ? '' : <Redirect to="/" />}
-            <Header loggedIn={loggedIn} />
             <Main>
               <SavedMovies
+                user={currentUser}
                 savedMoviesList={savedMoviesList}
                 onDeleteClick={handleDeleteMovie}
               />
             </Main>
-            <Footer />
           </Route>
           <Route path="/profile">
             {loggedIn ? '' : <Redirect to="/" />}
-            <Header loggedIn={loggedIn} />
             <Main>
               {isDataLoad ?
                 <Preloader />
@@ -216,7 +212,8 @@ export default function App() {
             <Error message="Страница не найдена" status="404" />
           </Route>
         </Switch>
-      </CurrentUserContext.Provider>
-    </div>
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }

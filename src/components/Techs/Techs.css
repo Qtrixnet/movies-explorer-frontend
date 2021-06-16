@@ -6,7 +6,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #272727;
+  background-color: rgba(245, 245, 245, 1);
+  border-radius: 10px;
 }
 
 .techs__subtitle {
@@ -47,7 +48,8 @@
   text-align: center;
   padding: 21px 0;
   border-radius: 10px;
-  background-color: #303030;
+  background-color: #ffffff;
+  box-shadow: 0 5px 20px rgb(235, 235, 235);
   margin-right: 10px;
   margin-bottom: 10px;
 }
@@ -59,6 +61,7 @@
 @media screen and (max-width: 768px) {
   .techs {
     padding: 90px 60px 80px;
+    border-radius: 0;
   }
 
   .techs__subtitle {

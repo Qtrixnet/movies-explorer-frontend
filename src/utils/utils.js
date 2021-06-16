@@ -31,6 +31,9 @@ export function transformMovies(movies) {
       movie.thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
       movie.image = `https://api.nomoreparties.co${movie.image.url}`
     }
+    if(!movie.country) {
+      movie.country = 'Russia';
+    }
   });
   return movies
 };
@@ -46,5 +49,9 @@ export function getSavedMovieCard(arr, id) {
 export function transformTime(duration) {
   const hours = Math.trunc(duration / 60);
   const minutes = duration % 60;
-  return `${hours}ч ${minutes}м`;
+  if(hours === 0) {
+    return `${minutes}м`;
+  } else {
+    return `${hours}ч ${minutes}м`;
+  }
 };

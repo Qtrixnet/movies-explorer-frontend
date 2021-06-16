@@ -2,7 +2,7 @@
   padding: 110px 70px 141px;
   box-sizing: border-box;
   width: 100%;
-  background-color: #202020;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,12 +61,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px 0 0 5px;
 }
 
 .about-project__week:nth-last-of-type(1) {
   max-width: 100%;
-  background-color: #303030;
-  color: white;
+  background-color: rgba(245, 245, 245, 1);
+  color: rgb(0, 0, 0);
+  border-radius: 0 5px 5px 0;
 }
 
 .about-project__week:nth-last-of-type(1)::after {

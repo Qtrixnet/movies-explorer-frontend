@@ -1,10 +1,11 @@
 import './Header.css'
 
 import React, { useState } from "react";
-import { Link, NavLink} from 'react-router-dom';
+import { Link, NavLink, Route } from 'react-router-dom';
 
-export default function Header({ path = false, loggedIn = false }) {
+export default function Header({ loggedIn = false }) {
   const [isClicked, setIsDataLoad] = useState(false);
+  const endpoints = ['/movies', '/saved-movies', '/profile', '/'];
 
   function handleClose() {
     setIsDataLoad(false)
@@ -15,19 +16,19 @@ export default function Header({ path = false, loggedIn = false }) {
   }
 
   return (
-    <>
+    <Route exact path={endpoints}>
       {
         !loggedIn ?
-          <header className='header header_logged-out'>
-            <Link to="/" className="header__logo" />
+          <header className='header'>
+            <Link to="/" title="На главную" className="header__logo" />
             <div className="header__button-container">
               <Link to="/sign-up" className="header__button">Регистрация</Link>
               <Link to="/sign-in" className="header__button header__button_active">Войти</Link>
             </div>
           </header >
           :
-          <header className={path === "/" ? 'header header_logged-out' : 'header header_logged-in'}>
-            <Link to="/" className="header__logo" />
+          <header className='header'>
+            <Link to="/" title="На главную" className="header__logo" />
             <div className="header__button-container header__button-container_logged header_logged-buttons">
               <NavLink to="/movies" activeClassName="header__logged-button_active" className="header__logged-button">Фильмы</NavLink>
               <NavLink to="/saved-movies" activeClassName="header__logged-button_active" className="header__logged-button">Сохраненные фильмы</NavLink>
@@ -54,6 +55,6 @@ export default function Header({ path = false, loggedIn = false }) {
             }
           </header >
       }
-    </>
+    </Route>
   )
 }

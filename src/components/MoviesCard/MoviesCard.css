@@ -8,12 +8,14 @@
   width: 270px;
   height: 151px;
   object-fit: cover;
+  box-shadow: 0 5px 15px rgb(235, 235, 235);
+  border-radius: 10px;
 }
 
 .movies__card-container {
   padding: 14px 0 29px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
@@ -37,12 +39,11 @@
   display: block;
   opacity: 0;
   position: absolute;
-  background-image: url('../../images/play.svg');
-  filter:drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
+  background-image: url("../../images/play.svg");
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100px;
-
 }
 
 .movies__card-overlay:hover {
@@ -50,7 +51,7 @@
 }
 
 .movies__card-link:hover .movies__card-image {
-  filter: grayscale(1);
+  filter: grayscale(.7) blur(2px)
 }
 
 .movies__card-like-button {
@@ -58,7 +59,7 @@
   height: 24px;
   border: 0;
   border-radius: 50%;
-  background-color: #313131;
+  background-color: rgb(206, 206, 206);
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("../../images/not-saved.svg");
@@ -69,7 +70,7 @@
   height: 24px;
   border: 0;
   border-radius: 50%;
-  background-color: #313131;
+  background-color: rgb(206, 206, 206);
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("../../images/saved.svg");
@@ -95,12 +96,29 @@
   font-size: 11px;
   line-height: 14px;
   color: rgba(139, 139, 139, 1);
-  margin: 6px 0 10px;
+  margin: 5px 0 5px;
+}
+
+.movies__card-movie-about {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+  color: rgba(139, 139, 139, 1);
 }
 
 @media screen and (max-width: 768px) {
   .movies__card-image {
     width: 339px;
+    height: 190px;
+  }
+  .movies__card-like-button_saved {
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .movies__card-image {
+    width: 100%;
     height: 190px;
   }
 }
@@ -120,7 +138,7 @@
     padding: 15px 0 29px;
   }
 
-  .movies__card-movie-time {
+  .movies__card-movie-about, .movies__card-movie-time {
     font-size: 10px;
     line-height: 13px;
   }

@@ -7,12 +7,12 @@ import SearchForm from '../SearchForm';
 import { filterMovies, filterShortMovies, transformMovies } from '../../utils/utils';
 import Preloader from '../Preloader';
 
-export default function Movies({ onLikeClick = false, onDeleteClick = false, savedMoviesList = [] }) {
+export default function Movies({ user = {}, onLikeClick = false, onDeleteClick = false, savedMoviesList = [] }) {
 
   const [shortMovies, setShortMovies] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [initialMovies, setInitialMovies] = useState([])
-  const [nothingFound, setNothingFound] = useState(false);
+  const [nothingFound, setNothingFound] = useState(true);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -22,16 +22,17 @@ export default function Movies({ onLikeClick = false, onDeleteClick = false, sav
     moviesList.length === 0 ? setNothingFound(true) : setNothingFound(false);
     setInitialMovies(moviesList);
     setFilteredMovies(shortMoviesCheckbox ? filterShortMovies(moviesList) : moviesList);
-    localStorage.setItem('movies', JSON.stringify(moviesList));
+    localStorage.setItem(`${user.email} - movies`, JSON.stringify(moviesList));
   }
 
-  //* Отправка формы поиска
+  //* Поиск по запросу
   function handleSearchSubmit(inputValue) {
     setIsDataLoading(true);
-    localStorage.setItem('movieSearch', inputValue);
-    localStorage.setItem('shortMovies', shortMovies);
+    localStorage.setItem(`${user.email} - movieSearch`, inputValue);
+    localStorage.setItem(`${user.email} - shortMovies`, shortMovies);
 
-    movies.getMovies()
+    movies
+      .getMovies()
       .then((data) => {
         handleSetFilteredMovies(transformMovies(data), inputValue, shortMovies);
       })
@@ -39,42 +40,51 @@ export default function Movies({ onLikeClick = false, onDeleteClick = false, sav
         setIsError(true);
         console.log(err);
       })
-      .finally(() => setIsDataLoading(false))
+      .finally(() => setIsDataLoading(false));
   }
 
-  //* Переключатель короткометражек
+  //* Состояние чекбокса
   function handleShortFilms() {
-    setShortMovies(!shortMovies)
+    setShortMovies(!shortMovies);
     if (!shortMovies) {
-      setFilteredMovies(filterShortMovies(initialMovies))
+      if (filterShortMovies(initialMovies).length === 0) {
+        setFilteredMovies(filterShortMovies(initialMovies));
+        setNothingFound(true);
+      } else {
+        setFilteredMovies(filterShortMovies(initialMovies));
+        setNothingFound(false);
+      }
     } else {
-      setFilteredMovies(initialMovies)
+      initialMovies.length === 0 ? setNothingFound(true) : setNothingFound(false);
+      setFilteredMovies(initialMovies);
     }
-    localStorage.setItem('shortMovies', !shortMovies);
+    localStorage.setItem(`${user.email} - shortMovies`, !shortMovies);
   }
 
-  //* Состояние переключателя корокометражек
+  //* Проверка чекбокса в локальном хранилище
   useEffect(() => {
-    if (localStorage.getItem('shortMovies') === 'true') {
-      setShortMovies(true)
+    if (localStorage.getItem(`${user.email} - shortMovies`) === "true") {
+      setShortMovies(true);
     } else {
-      setShortMovies(false)
+      setShortMovies(false);
     }
-  }, []);
+  }, [user]);
 
   //* Рендер фильмов из локального хранилища
   useEffect(() => {
-    if (localStorage.getItem('movies')) {
-      const movies = JSON.parse(localStorage.getItem('movies'))
-      setInitialMovies(movies)
-      if (localStorage.getItem('shortMovies') === 'true') {
+    if (localStorage.getItem(`${user.email} - movies`)) {
+      const movies = JSON.parse(localStorage.getItem(`${user.email} - movies`));
+      movies.length === 0 ? setNothingFound(true) : setNothingFound(false)
+      setInitialMovies(movies);
+      if (localStorage.getItem(`${user.email} - shortMovies`) === "true") {
         setFilteredMovies(filterShortMovies(movies));
       } else {
         setFilteredMovies(movies);
       }
+    } else {
+      setNothingFound(true)
     }
-    
-  }, []);
+  }, [user]);
 
   return (
     <>

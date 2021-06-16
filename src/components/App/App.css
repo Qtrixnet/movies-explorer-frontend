@@ -3,10 +3,10 @@
 }
 
 .App { 
-  background-color: #202020;
+  background-color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 1);
   min-height: 100vh;
   width: 100%;
-  color: rgba(255, 255, 255, 1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,3 +27,8 @@
   margin: 0;
   padding: 0;
 }
+
+.App *::selection {
+  color: rgb(0, 0, 0);
+  background: rgba(61, 220, 132, 1);
+ }

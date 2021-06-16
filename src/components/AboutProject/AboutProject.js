@@ -10,7 +10,7 @@ export default function Navtab() {
       <SectionTitle id={"about-project"} text={"О проекте"} />
       <div className="about-project__text">
         <div className="about-project__column">
-          <h3 className="about-project__subtitle">Дипломный проект включал 5 этаповДипломный проект включал 5 этапов</h3>
+          <h3 className="about-project__subtitle">Дипломный проект включал 5 этапов</h3>
           <p className="about-project__paragraph">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
         </div>
         <div className="about-project__column">

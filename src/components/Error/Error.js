@@ -15,7 +15,7 @@ export default function Error({status, message}) {
     <section className="error">
       <span className="error__status">{status}</span>
       <h1 className="error__message">{message}</h1>
-      <Link onClick={handleClick} className="error__link">Назад</Link>
+      <Link onClick={handleClick} to={history} className="error__link">Назад</Link>
     </section>
   )
 }

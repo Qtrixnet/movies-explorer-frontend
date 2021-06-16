@@ -10,29 +10,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-bottom: 28px; */
 }
 
 .search-form__input {
   width: calc(100% - 54px);
-  padding: 16px 20px;
-  color: rgba(139, 139, 139, 1);
-  background-color: #2f2f2f;
+  padding: 13px 20px;
+  color: rgb(0, 0, 0);
+  background-color: rgba(245, 245, 245, 1);
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  border: 0;
-  border-radius: 8px;
+  border: 2px solid white;
+  border-radius: 50px;
 }
 
+.search-form__input:focus{ 
+  outline: 0;
+  border-color: rgba(61, 220, 132, 1);
+}
 .search-form__button {
   width: 44px;
   height: 44px;
   margin-left: 10px;
   background-color: #4285f4;
   border: 0;
-  border-radius: 5px;
-  background-image: url("../../images/arrow-button.svg");
+  border-radius: 50%;
+  background-image: url("../../images/lupa.svg");
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
@@ -41,17 +44,7 @@
 .search-form__button:hover {
   cursor: pointer;
   opacity: .8;
-}
-
-.search-form__button:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 29px;
-  height: 30px;
-  border-left: 2px solid #ffffff;
+  transform: rotate(15deg);
 }
 
 .search-form__checkbox {
@@ -63,6 +56,10 @@
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.search-form__label:hover {
+  opacity: .8;
 }
 
 .search-form__text {
@@ -79,7 +76,8 @@
   position: relative;
   cursor: pointer;
   transition: 0.2s ease;
-  background-color: #2f2f2f;
+  background-color: #e8e8e8;
+  box-shadow: 0 0 7px rgba(245, 245, 245, 1);
 }
 
 .search-form__label:before {

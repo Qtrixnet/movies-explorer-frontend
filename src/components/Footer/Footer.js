@@ -1,11 +1,14 @@
 import './Footer.css';
 
 import React from "react";
+import { Route } from 'react-router-dom';
 
 export default function Footer() {
+  const endpoints = ['/movies', '/saved-movies', '/'];
 
   return (
-    <footer className="footer">
+    <Route exact path={endpoints}>
+      <footer className="footer">
         <h4 className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</h4>
         <div className="footer__container">
           <span className="footer__date">&copy; Кирилл Шашичев {new Date().getFullYear()}</span>
@@ -15,6 +18,7 @@ export default function Footer() {
             <li className="footer__list-item"><a target="_blank" rel="noreferrer" className="footer__link" href="https://www.facebook.com/">Facebook</a></li>
           </ul>
         </div>
-    </footer>
+      </footer>
+    </Route>
   )
 }

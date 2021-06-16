@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import MoviesCard from '../MoviesCard';
 import useScreenWidth from '../../hooks/useScreenWidth';
 import { DEVICE_PARAMS } from '../../utils/constants';
+import planet from '../../images/planet.svg'
 
-export default function MoviesCardList({ nothingFound = false, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMoviesList = [], savedMoviesPage = false}) {
+export default function MoviesCardList({ nothingFound = true, moviesList = [], onLikeClick = false, onDeleteClick = false, savedMoviesList = [], savedMoviesPage = false}) {
   
   const { tablet, mobileL, mobileS } = DEVICE_PARAMS;
   const screenWidth = useScreenWidth();
@@ -52,7 +53,7 @@ export default function MoviesCardList({ nothingFound = false, moviesList = [], 
   return (
     <>
       {
-        nothingFound ? <span id="movies__error" className='movies__error movies__error_visible'>Ничего не найдено</span> :
+        nothingFound ? <img id="movies__not-found" alt="not found error" className='movies__not-found' src={planet}></img> :
           <>
             <ul className="movies__card-list">
               {showMovieList.map((movie) => (
@@ -66,7 +67,7 @@ export default function MoviesCardList({ nothingFound = false, moviesList = [], 
                 />
               ))}
             </ul>
-            {showMovieList.length >= 12 && showMovieList.length < moviesList.length ? <button onClick={handleClickMoreMovies} className="movies__more-films">Ещё</button> : ''}
+            {showMovieList.length >= 5 && showMovieList.length < moviesList.length ? <button onClick={handleClickMoreMovies} className="movies__more-films">Ещё</button> : ''}
           </>
       }
     </>
